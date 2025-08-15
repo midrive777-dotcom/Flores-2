@@ -1,1 +1,105 @@
-# Flores-2
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>¿Quién te ha mandado flores?</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Poppins&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom right, #ffe4e1, #fff0f5);
+      text-align: center;
+      padding: 50px;
+      color: #4b2e2e;
+    }
+
+    h1, h2 {
+      font-family: 'Playfair Display', serif;
+    }
+
+    button {
+      background-color: #ffb6c1;
+      border: none;
+      border-radius: 25px;
+      padding: 12px 24px;
+      font-size: 16px;
+      margin: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #ff69b4;
+      color: white;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .correct {
+      background-color: #98fb98 !important;
+    }
+
+    .incorrect {
+      background-color: #f08080 !important;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Página principal -->
+  <section id="inicio">
+    <h1>Si estás aquí es que sientes que debes saber quién te ha mandado flores...</h1>
+    <h2>¿Quieres una pista?</h2>
+    <button onclick="mostrar('pista1')">🌸 Pista 1</button>
+    <button id="btnPista2" onclick="mostrar('pista2')" disabled>🌷 Pista 2</button>
+  </section>
+
+  <!-- Pista 1 -->
+  <section id="pista1" class="hidden">
+    <h2>¿Dónde está el lugar más cercano a tu trabajo?</h2>
+    <button onclick="verificar(this, false)">📚 Biblioteca</button>
+    <button onclick="verificar(this, false)">🍷 Bar</button>
+    <button onclick="verificar(this, true)">🌳 Parque</button>
+    <br><br>
+    <button onclick="volver()">🔙 Volver</button>
+  </section>
+
+  <!-- Pista 2 -->
+  <section id="pista2" class="hidden">
+    <h2>¡Aquí tienes una pista más!</h2>
+    <p>Haz clic para ir a la ubicación:</p>
+    <a href="https://www.google.com/maps?q=40.3082884,-3.7452395" target="_blank">
+      <button>📍 Ir</button>
+    </a>
+    <br><br>
+    <button onclick="volver()">🔙 Volver</button>
+  </section>
+
+  <script>
+    function mostrar(id) {
+      document.querySelectorAll('section').forEach(sec => sec.classList.add('hidden'));
+      document.getElementById(id).classList.remove('hidden');
+    }
+
+    function volver() {
+      document.querySelectorAll('section').forEach(sec => sec.classList.add('hidden'));
+      document.getElementById('inicio').classList.remove('hidden');
+    }
+
+    function verificar(boton, esCorrecta) {
+      if (esCorrecta) {
+        boton.classList.add('correct');
+        document.getElementById('btnPista2').disabled = false;
+        alert("¡Correcto! Ahora puedes acceder a la Pista 2.");
+        mostrar('pista2');
+      } else {
+        boton.classList.add('incorrect');
+        alert("Esa no es la respuesta correcta. Intenta otra vez.");
+      }
+    }
+  </script>
+
+</body>
+</html>
